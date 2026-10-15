@@ -29,4 +29,4 @@ A separate 240-second real-time session clock runs only during play (pauses on p
 - `src/components/` screens and panels, `Art.tsx` holds all SVG art
 - `tests/` engine invariants (300 random playthroughs), timer hook, UI flow
 
-Sound is off by default (WebAudio synth, toggle on title or pause menu). Reduced motion follows system settings and can be toggled in the pause menu. Only preferences, opening-seen and endings found are stored in localStorage; active runs are never persisted.
+The soundtrack is `public/audio/treachery.mp3` (supplied by the developer), looped from START SURVIVAL to the ending; if the file is missing, a generative WebAudio score plays instead. It starts when you press START SURVIVAL and gets tenser during the boss; toggle it on the title screen or pause menu. Reduced motion follows system settings and can be toggled in the pause menu. Only preferences, opening-seen and endings found are stored in localStorage; active runs are never persisted.

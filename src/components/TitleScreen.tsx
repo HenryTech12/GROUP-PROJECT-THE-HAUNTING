@@ -44,6 +44,7 @@ export function TitleScreen({ onStart, sound, onSound, discovered, openingSeen }
             <p className="modal-body">
               Group Project: The Haunting is a 3–5 minute horror-comedy about a late assignment and a teammate who has been dead since before the course began. Manage time, sanity and trust, then face the Ghost Member.
             </p>
+            <p className="modal-body">Music: "Treachery" from the Bleach soundtrack, supplied by the developer. All rights belong to their respective owners.</p>
             <p className="modal-body">Every character, ghost and group chat is fictional. Any resemblance to your own group project is a coincidence and a warning.</p>
           </div>
         </div>

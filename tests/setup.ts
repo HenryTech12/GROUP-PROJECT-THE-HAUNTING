@@ -19,3 +19,7 @@ if (!window.matchMedia) {
     dispatchEvent: () => false,
   })) as unknown as typeof window.matchMedia;
 }
+
+// jsdom does not implement media playback
+window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+window.HTMLMediaElement.prototype.pause = () => {};
