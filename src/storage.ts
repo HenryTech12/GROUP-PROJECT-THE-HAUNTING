@@ -11,7 +11,7 @@ export interface Saved {
   plays: number;
 }
 
-const DEFAULTS: Saved = { sound: false, reduceMotion: null, openingSeen: false, endings: [], bestProgress: 0, plays: 0 };
+const DEFAULTS: Saved = { sound: true, reduceMotion: null, openingSeen: false, endings: [], bestProgress: 0, plays: 0 };
 
 export function loadSaved(): Saved {
   try {
@@ -19,7 +19,7 @@ export function loadSaved(): Saved {
     if (!raw) return { ...DEFAULTS };
     const p = JSON.parse(raw) as Partial<Saved>;
     return {
-      sound: p.sound === true,
+      sound: p.sound !== false,
       reduceMotion: typeof p.reduceMotion === 'boolean' ? p.reduceMotion : null,
       openingSeen: p.openingSeen === true,
       endings: Array.isArray(p.endings) ? p.endings.filter((e): e is EndingId => ['last-word', 'credit', 'overdue'].includes(e as string)) : [],

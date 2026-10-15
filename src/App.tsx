@@ -5,7 +5,7 @@ import { REAL_TIME_LIMIT_SECONDS } from './game/constants';
 import type { GameAction } from './game/types';
 import { useCountdown } from './hooks/useCountdown';
 import { loadSaved, persist, type Saved } from './storage';
-import { setSoundEnabled, sfx, startRain, stopRain } from './audio';
+import { setMusicIntensity, setSoundEnabled, sfx, startMusic, startRain, stopMusic, stopRain } from './audio';
 import { TitleScreen } from './components/TitleScreen';
 import { Opening } from './components/Opening';
 import { FirstChoice } from './components/FirstChoice';
@@ -35,9 +35,28 @@ export default function App() {
 
   useEffect(() => {
     setSoundEnabled(saved.sound);
-    if (saved.sound && screen !== 'title') startRain();
-    else stopRain();
+    // "Treachery in Bleach" starts when START SURVIVAL is pressed (a user gesture) and plays until the ending
+    const inRun = screen !== 'title' && !(screen === 'game' && game.phase === 'ended');
+    if (saved.sound && inRun) {
+      startMusic();
+      startRain();
+    } else {
+      stopMusic(game.phase === 'ended' ? 2.5 : 0.8);
+      stopRain();
+    }
+  }, [saved.sound, screen, game.phase]);
+
+  useEffect(() => {
+    const unlock = () => {
+      if (saved.sound && screen !== 'title') startMusic();
+    };
+    window.addEventListener('pointerdown', unlock);
+    return () => window.removeEventListener('pointerdown', unlock);
   }, [saved.sound, screen]);
+
+  useEffect(() => {
+    setMusicIntensity(game.phase === 'boss' ? 1 : game.phase === 'playing' && game.timeLeft <= 30 ? 0.5 : 0);
+  }, [game.phase, game.timeLeft]);
 
   const playing = screen === 'game' && (game.phase === 'playing' || game.phase === 'boss');
   const realLeft = useCountdown({
