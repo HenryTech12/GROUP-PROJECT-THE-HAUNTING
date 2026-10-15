@@ -1,0 +1,13 @@
+export const START = { progress: 20, sanity: 80, trust: 50, time: 60 } as const;
+export const MAX_TIME = 60;
+export const REAL_TIME_LIMIT_SECONDS = 240;
+export const BOSS_TRIGGER_TIME = 15;
+export const BOSS_TRIGGER_PROGRESS = 95;
+export const BOSS_MIN_TIME = 6;
+export const MAX_BOSS_ROUNDS = 5;
+export const BASE_CLAIM = 25;
+export const MAX_CLAIM = 40;
+export const MAX_EVENTS = 6;
+export const MAX_CLUES = 5;
+export const SUBMIT_MIN_PROGRESS = 50;
+export const GOOD_ENDING_MIN_PROGRESS = 65;
